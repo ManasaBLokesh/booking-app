@@ -1,0 +1,14 @@
+
+http://localhost:5000/fetchdetails/adhithya@gmail.com
+
+http://localhost:5000/fetchAlldetails
+
+localhost:5000/insertDetails/query?name=Adhithya&email_id=adhithya@gmail.com&phone_no=+9178276726378&check_in_date=2025-01-25&check_out_date=2025-01-27
+
+localhost:5000/insertDetails/query?name=Adhithya&email_id=adhithya@gmail.com&phone_no=+9178276726378&check_in_date=2025-01-31&check_out_date=2025-02-01
+
+http://localhost:5000/cancelBooking/query?email_id=adhithya@gmail.com&roomNo=102
+
+http://localhost:5000/cancelBooking/adhithya@gmail.com
+
+http://localhost:5000/updateDetails/query?email_id=adhithya@gmail.com&check_in_date=2025-01-25&check_out_date=2025-01-27
