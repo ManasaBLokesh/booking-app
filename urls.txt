@@ -1,8 +1,15 @@
 1. Booking Room API:
 
-localhost:5000/insertDetails/query?name=Adhithya&email_id=adhithya@gmail.com&phone_no=+9178276726378&check_in_date=2025-01-25&check_out_date=2025-01-27
+http://localhost:5000/insertDetails/query
 
-localhost:5000/insertDetails/query?name=Adhithya&email_id=adhithya@gmail.com&phone_no=+9178276726378&check_in_date=2025-01-31&check_out_date=2025-02-01
+{
+  "name": "Leven",
+  "email_id": "leven@gmail.com",
+  "phone_no": "1234567890",
+  "check_in_date": "2025-02-01",
+  "check_out_date": "2025-02-07"
+}
+
 
 2. View Booking Details API:
 
@@ -14,8 +21,18 @@ http://localhost:5000/fetchAlldetails
 
 4. Cancel Room Booking API:
 
-http://localhost:5000/cancelBooking/adhithya@gmail.com
+http://localhost:5000/cancelBooking
+
+{
+  "mailID": "leven@gmail.com"
+}
 
 5. Modify Booking API:
 
-http://localhost:5000/updateDetails/query?email_id=adhithya@gmail.com&check_in_date=2025-01-25&check_out_date=2025-01-27
+http://localhost:5000/updateDetails/query
+
+{
+  "email_id": "leven@gmail.com",
+  "check_in_date": "2025-02-01",
+  "check_out_date": "2025-02-07"
+}

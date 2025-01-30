@@ -6,8 +6,8 @@ const fs = require("fs");
 const path = require("path");
 app.use(express.json());
 
-app.get("/insertDetails/query", (req, res) => {
-  const { name, email_id, phone_no, check_in_date, check_out_date } = req.query;
+app.post("/insertDetails/query", (req, res) => {
+  const { name, email_id, phone_no, check_in_date, check_out_date } = req.body; 
   console.log(name, email_id, phone_no, check_in_date, check_out_date);
 
   let startDate = new Date(check_in_date);
@@ -67,6 +67,7 @@ app.get("/insertDetails/query", (req, res) => {
   }
 });
 
+
 app.get("/fetchdetails/:mailID", (req, res) => {
   console.log(req.params);
   let found = false;
@@ -96,43 +97,42 @@ app.get("/fetchAlldetails", (req, res) => {
   res.status(200).json(room);
 });
 
-app.get("/cancelBooking/:mailID", (req, res) => {
-  const { mailID } = req.params;
-  console.log(req.params);
+app.post("/cancelBooking", (req, res) => {
+  const { mailID } = req.body; 
+  console.log(req.body);
   console.log(mailID);
-  const roomInfo = Data.module.find((room) => {
-    if (room.email_id === mailID) {
-      console.log("sfd", room.email_id);
-      if (!room.email_id) {
-        return res.status(404).json({ message: "Booking not found!" });
-      }
 
-      room.active = "N";
-      room.Number_of_guests = 0;
-      room.check_in_date = null;
-      room.check_out_date = null;
-      room.number_of_days = 0;
-      room.Name = null;
-      room.email_id = null;
-      room.phone_no = null;
-      room.Booked_on = null;
+  const room = Data.module.find((room) => room.email_id === mailID);
 
-      fs.writeFileSync(
-        path.join(__dirname, "data.js"),
-        `exports.module = ${JSON.stringify(Data.module, null, 2)};`,
-        "utf-8"
-      );
-      const response = {
-        message: "Room cancelled ☹️!!",
-      };
+  if (room) {
+    console.log("Booked mail id", room.email_id);
 
-      return res.status(200).json(response);
-    }
-  });
+    room.active = "N";
+    room.Number_of_guests = 0;
+    room.check_in_date = null;
+    room.check_out_date = null;
+    room.number_of_days = 0;
+    room.Name = null;
+    room.email_id = null;
+    room.phone_no = null;
+    room.Booked_on = null;
+
+    fs.writeFileSync(
+      path.join(__dirname, "data.js"),
+      `exports.module = ${JSON.stringify(Data.module, null, 2)};`,
+      "utf-8"
+    );
+
+    const response = {
+      message: "Room cancelled ☹️!!",
+    };
+    return res.status(200).json(response); 
+  }
+  return res.status(404).json({ message: "Booking not found!" });
 });
 
-app.get("/updateDetails/query", (req, res) => {
-  const { email_id, check_in_date, check_out_date } = req.query;
+app.post("/updateDetails/query", (req, res) => {
+  const { email_id, check_in_date, check_out_date } = req.body; 
   console.log(email_id, check_in_date, check_out_date);
 
   let roomFound = false;
@@ -179,6 +179,7 @@ app.get("/updateDetails/query", (req, res) => {
     res.status(404).json({ error: "Invalid guest details or room not found" });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log("port is 5000");
