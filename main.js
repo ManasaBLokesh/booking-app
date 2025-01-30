@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 app.use(express.json());
 
+// Booking Room API
 app.post("/insertDetails/query", (req, res) => {
   const { name, email_id, phone_no, check_in_date, check_out_date } = req.body; 
   console.log(name, email_id, phone_no, check_in_date, check_out_date);
@@ -67,7 +68,7 @@ app.post("/insertDetails/query", (req, res) => {
   }
 });
 
-
+// View Booking Details API
 app.get("/fetchdetails/:mailID", (req, res) => {
   console.log(req.params);
   let found = false;
@@ -87,6 +88,7 @@ app.get("/fetchdetails/:mailID", (req, res) => {
   }
 });
 
+// View All Guests in the Hotel API
 app.get("/fetchAlldetails", (req, res) => {
   const room = Data.module.filter((room) => room.active === "Y");
   console.log(room);
@@ -97,6 +99,7 @@ app.get("/fetchAlldetails", (req, res) => {
   res.status(200).json(room);
 });
 
+// Cancel Room Booking API
 app.post("/cancelBooking", (req, res) => {
   const { mailID } = req.body; 
   console.log(req.body);
@@ -131,6 +134,7 @@ app.post("/cancelBooking", (req, res) => {
   return res.status(404).json({ message: "Booking not found!" });
 });
 
+// Modify Booking API
 app.post("/updateDetails/query", (req, res) => {
   const { email_id, check_in_date, check_out_date } = req.body; 
   console.log(email_id, check_in_date, check_out_date);
