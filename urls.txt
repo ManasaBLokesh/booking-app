@@ -13,7 +13,7 @@ http://localhost:5000/insertDetails/query
 
 2. View Booking Details API:
 
-http://localhost:5000/fetchdetails/adhithya@gmail.com
+http://localhost:5000/fetchdetails/leven@gmail.com
 
 3. View All Guests in the Hotel API:
 
